@@ -1,11 +1,9 @@
 import type { SiteSettings } from '../types';
 
 export const siteSettings: SiteSettings = {
-  phone: '+91 98765 43210',
-  whatsapp: '+919876543210',
-  email: 'stay@lonavalaluxurystay.com',
+  phone: '+91 9890537339',
+  whatsapp: '+919890537339',
+  email: 'lonavalaluxestay@gmail.com',
   address: 'Lonavala, Maharashtra 410401',
-  facebook: 'https://facebook.com/lonavalaluxurystay',
-  instagram: 'https://instagram.com/lonavalaluxurystay',
-  youtube: 'https://youtube.com/@lonavalaluxurystay',
+  instagram: 'https://www.instagram.com/lonavala_luxe_stay?igsh=ancyaTgyaWttcnEz',
 };

@@ -39,7 +39,7 @@ export interface SiteSettings {
   whatsapp: string;
   email: string;
   address: string;
-  facebook: string;
+  facebook?: string;
   instagram: string;
-  youtube: string;
+  youtube?: string;
 }
