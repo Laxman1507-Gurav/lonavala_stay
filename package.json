@@ -1,0 +1,10 @@
+{
+  "name": "lonavala",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix react-app",
+    "build": "npm run build --prefix react-app",
+    "preview": "npm run preview --prefix react-app"
+  }
+}
