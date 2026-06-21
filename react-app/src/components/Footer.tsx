@@ -27,22 +27,10 @@ export default function Footer() {
             breathtaking mountain views, and absolute luxury escapes in Lonavala &amp; Khandala.
           </p>
           <div className="flex space-x-4 pt-4">
-            {siteSettings.facebook && (
-              <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300">
-                <i className="fa-brands fa-facebook-f text-sm"></i>
-              </a>
-            )}
             {siteSettings.instagram && (
               <a href={siteSettings.instagram} target="_blank" rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300">
                 <i className="fa-brands fa-instagram text-sm"></i>
-              </a>
-            )}
-            {siteSettings.youtube && (
-              <a href={siteSettings.youtube} target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300">
-                <i className="fa-brands fa-youtube text-sm"></i>
               </a>
             )}
           </div>
