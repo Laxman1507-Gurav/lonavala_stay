@@ -61,9 +61,15 @@ export default function VillaCard({ villa }: VillaCardProps) {
 
         {/* Price & CTA */}
         <div className="flex items-center justify-between pt-2">
-          <div>
-            <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Price Per Night</span>
-            <span className="text-lg font-bold text-[#0F172A]">{formatPrice(villa.price_per_night)}</span>
+          <div className="flex flex-col">
+            <div className="mb-1">
+              <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Weekday</span>
+              <span className="text-sm font-bold text-[#0F172A]">{formatPrice(villa.weekday_price)}</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Weekend</span>
+              <span className="text-sm font-bold text-[#0F172A]">{formatPrice(villa.weekend_price)}</span>
+            </div>
           </div>
           <Link
             to={`/villa-details?id=${villa.id}`}

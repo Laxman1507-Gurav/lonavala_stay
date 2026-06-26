@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 
@@ -8,7 +8,7 @@ import VillaCard from '../components/VillaCard'
 import FeedbackForm from '../components/FeedbackForm'
 
 import { featuredVillas } from '../data/villas'
-import { allOffers } from '../data/offers'
+import { allDestinations } from '../data/destinations'
 import { getAllTestimonials } from '../data/testimonials'
 import { siteSettings } from '../data/settings'
 import { formatDate } from '../utils/format'
@@ -33,24 +33,28 @@ const whyUs = [
 const categories = [
   { name: 'Pool Villas', icon: 'fa-water-ladder', desc: 'Stunning estates with sprawling private pools.' },
   { name: 'Family Villas', icon: 'fa-people-roof', desc: 'Multi-bedroom stays designed for family comfort.' },
-  { name: 'Pet Friendly Villas', icon: 'fa-paw', desc: 'Fenced gardens and play areas for your pets.' },
   { name: 'Premium Villas', icon: 'fa-gem', desc: 'Signature estates with bespoke luxury design.' },
 ]
 
-const destinations = [
-  { name: 'Lonavala', desc: 'Heart of the hills', image: '/assets/images/gallery/lonavala night.jpg' },
-  { name: 'Khandala', desc: 'Majestic cliff views', image: '/assets/images/gallery/khandala.jpg' },
-  { name: 'Pawna Lake', desc: 'Lakeside serenity', image: '/assets/images/gallery/pawna lake.jpg' },
-  { name: 'Tiger Point', desc: 'Windy valley clouds', image: '/assets/images/gallery/tiger point.jpg' },
-  { name: 'Bhushi Dam', desc: 'Waterfall cascades', image: '/assets/images/gallery/bhushi dam.jpg' },
-]
 
 export default function HomePage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const location = useLocation()
 
   useEffect(() => {
     setTestimonials(getAllTestimonials())
   }, [])
+
+  useEffect(() => {
+    if (location.search.includes('scrollTo=destinations')) {
+      const element = document.getElementById('destinations')
+      if (element) {
+        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 100)
+      }
+    }
+  }, [location])
+
+
 
   const handleFeedbackSuccess = () => {
     setTestimonials(getAllTestimonials())
@@ -153,12 +157,19 @@ export default function HomePage() {
       {/* Section 6: Villa Categories */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center space-y-3 mb-16">
+          <div className="text-center space-y-3 mb-6">
             <span className="text-[#D4AF37] uppercase tracking-[0.25em] text-xs font-semibold">Select Your Style</span>
             <h2 className="font-heading text-3xl md:text-5xl text-[#0F172A] font-bold">Explore Categories</h2>
             <div className="w-24 h-0.5 bg-[#D4AF37] mx-auto mt-4"></div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Clarification banner */}
+          <div className="flex items-center justify-center gap-3 mb-12 bg-[#F8F5F0] border border-[#D4AF37]/30 px-6 py-4 max-w-2xl mx-auto">
+            <i className="fa-solid fa-circle-info text-[#D4AF37] text-lg shrink-0"></i>
+            <p className="text-sm text-gray-600 text-center">
+              All our villas come with a <span className="font-semibold text-[#0F172A]">private pool</span>, are <span className="font-semibold text-[#0F172A]">family-friendly</span>, and offer a <span className="font-semibold text-[#0F172A]">premium experience</span> — these categories help you find the right style for your stay.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {categories.map((cat) => (
               <Link
                 key={cat.name}
@@ -194,10 +205,10 @@ export default function HomePage() {
             <div className="w-24 h-0.5 bg-[#D4AF37] mx-auto mt-4"></div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {destinations.map((dest) => (
+            {allDestinations.map((dest) => (
               <Link
                 key={dest.name}
-                to={`/villas?location=${encodeURIComponent(dest.name)}`}
+                to={`/destination?name=${encodeURIComponent(dest.name)}`}
                 className="group relative h-80 overflow-hidden block shadow-lg"
               >
                 <div
@@ -217,60 +228,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section 8: Special Packages */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center space-y-3 mb-16">
-            <span className="text-[#D4AF37] uppercase tracking-[0.25em] text-xs font-semibold">Bespoke Promotions</span>
-            <h2 className="font-heading text-3xl md:text-5xl text-[#0F172A] font-bold">Special Packages</h2>
-            <div className="w-24 h-0.5 bg-[#D4AF37] mx-auto mt-4"></div>
-          </div>
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            slidesPerView={1}
-            spaceBetween={24}
-            loop={true}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            navigation={true}
-            breakpoints={{
-              640: { slidesPerView: 1.5 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="offers-swiper pb-10"
-          >
-            {allOffers.map((offer) => (
-              <SwiperSlide key={offer.id} className="h-auto">
-                <div className="bg-[#F8F5F0] border border-gray-100 hover-gold-border group flex flex-col justify-between h-full shadow-md overflow-hidden transition-all duration-300 p-6">
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="bg-[#D4AF37] text-[#0F172A] font-bold text-xs uppercase px-3 py-1">
-                        {offer.discount}
-                      </span>
-                      <span className="text-xs text-gray-400">
-                        <i className="fa-solid fa-clock mr-1"></i>Valid till: {formatDate(offer.expiry_date)}
-                      </span>
-                    </div>
-                    <h3 className="font-heading text-xl font-bold text-[#0F172A] group-hover:text-[#D4AF37] transition-colors duration-300">
-                      {offer.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-3">{offer.description}</p>
-                  </div>
-                  <div className="pt-6">
-                    <Link
-                      to="/villas"
-                      className="w-full text-center bg-[#0F172A] hover:bg-[#D4AF37] hover:text-[#0F172A] text-white text-xs font-semibold uppercase tracking-wider py-3 block transition-all duration-300"
-                    >
-                      View Villas
-                    </Link>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
 
       {/* Section 9: Testimonials */}
       <section className="py-24 bg-[#0F172A] text-white overflow-hidden relative">

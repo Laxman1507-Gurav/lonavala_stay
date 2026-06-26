@@ -10,7 +10,10 @@ export interface Villa {
   guests: number;
   parking: number;
   pool_size: string;
-  price_per_night: number;
+  weekday_price: number;
+  weekend_price: number;
+  check_in_time: string;
+  check_out_time: string;
   rating: number;
   featured: boolean;
   has_pool: boolean;
@@ -19,14 +22,7 @@ export interface Villa {
   amenities: string[];
 }
 
-export interface Offer {
-  id: number;
-  title: string;
-  discount: string;
-  description: string;
-  expiry_date: string;
-  image_path: string;
-}
+
 
 export interface Testimonial {
   name: string;

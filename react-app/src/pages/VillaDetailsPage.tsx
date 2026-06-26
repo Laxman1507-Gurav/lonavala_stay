@@ -12,7 +12,7 @@ export default function VillaDetailsPage() {
 
   if (!villa) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F8F5F0] text-center px-6">
+      <div className="min-h-[100dvh] flex flex-col items-center justify-center bg-[#F8F5F0] text-center px-6">
         <div className="h-28"></div>
         <i className="fa-solid fa-circle-question text-6xl text-[#D4AF37]/30 mb-4"></i>
         <h1 className="font-heading text-3xl font-bold text-[#0F172A] mb-2">Villa Not Found</h1>
@@ -105,9 +105,15 @@ export default function VillaDetailsPage() {
           {/* Right: Booking Card */}
           <div className="lg:col-span-1">
             <div className="bg-white shadow-xl border-t-4 border-[#D4AF37] p-8 space-y-6 lg:sticky lg:top-28">
-              <div>
-                <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Price Per Night</span>
-                <span className="text-3xl font-bold text-[#0F172A]">{formatPrice(villa.price_per_night)}</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Weekday</span>
+                  <span className="text-2xl font-bold text-[#0F172A]">{formatPrice(villa.weekday_price)}</span>
+                </div>
+                <div>
+                  <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Weekend</span>
+                  <span className="text-2xl font-bold text-[#0F172A]">{formatPrice(villa.weekend_price)}</span>
+                </div>
               </div>
 
               {/* Quick Stats */}
@@ -138,6 +144,14 @@ export default function VillaDetailsPage() {
                 <div className="flex items-center gap-2">
                   <i className="fa-solid fa-water-ladder text-[#D4AF37]"></i>
                   <span>Private Pool — {villa.pool_size}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <i className="fa-solid fa-clock text-[#D4AF37]"></i>
+                  <span>Check-in: {villa.check_in_time}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <i className="fa-solid fa-clock text-[#D4AF37]"></i>
+                  <span>Check-out: {villa.check_out_time}</span>
                 </div>
               </div>
 

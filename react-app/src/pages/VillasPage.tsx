@@ -4,7 +4,6 @@ import VillaCard from '../components/VillaCard'
 import { allVillas } from '../data/villas'
 import type { Villa } from '../types'
 
-const locations = ['Lonavala', 'Khandala', 'Pawna Lake', 'Tiger Point', 'Bhushi Dam']
 const capacities = [
   { label: 'Any BHK', value: '' },
   { label: '2BHK', value: '2BHK' },
@@ -13,50 +12,22 @@ const capacities = [
   { label: '5BHK', value: '5BHK' },
   { label: '6BHK', value: '6BHK' },
 ]
-const guestOptions = [
-  { label: 'Any Count', value: 0 },
-  { label: '2+ Guests', value: 2 },
-  { label: '6+ Guests', value: 6 },
-  { label: '10+ Guests', value: 10 },
-  { label: '15+ Guests', value: 15 },
-  { label: '20+ Guests', value: 20 },
-]
-const villaTypes = [
-  { label: 'All Categories', value: '' },
-  { label: 'Pool Villas', value: 'Pool Villas' },
-  { label: 'Family Villas', value: 'Family Villas' },
-  { label: 'Pet Friendly Villas', value: 'Pet Friendly Villas' },
-  { label: 'Premium Villas', value: 'Premium Villas' },
-]
 
 export default function VillasPage() {
   const [searchParams] = useSearchParams()
-  const initLocation = searchParams.get('location') || ''
-  const initVillaType = searchParams.get('villa_type') || ''
-  const initGuests = parseInt(searchParams.get('guests') || '0')
-
-  const [filterLocation, setFilterLocation] = useState(initLocation)
   const [filterCapacity, setFilterCapacity] = useState('')
-  const [filterGuests, setFilterGuests] = useState(initGuests)
-  const [filterType, setFilterType] = useState(initVillaType)
   const [filtered, setFiltered] = useState<Villa[]>(allVillas)
 
   useEffect(() => {
     const result = allVillas.filter((v) => {
-      if (filterLocation && !v.location.toLowerCase().includes(filterLocation.toLowerCase())) return false
       if (filterCapacity && v.capacity !== filterCapacity) return false
-      if (filterGuests && v.guests < filterGuests) return false
-      if (filterType && !v.villa_type.toLowerCase().includes(filterType.toLowerCase())) return false
       return true
     })
     setFiltered(result)
-  }, [filterLocation, filterCapacity, filterGuests, filterType])
+  }, [filterCapacity])
 
   const handleReset = () => {
-    setFilterLocation('')
     setFilterCapacity('')
-    setFilterGuests(0)
-    setFilterType('')
   }
 
   return (
@@ -104,22 +75,6 @@ export default function VillasPage() {
               </div>
 
               <div className="space-y-6">
-                {/* Location */}
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-semibold text-[#334155]/60 tracking-wider">Location</label>
-                  <select
-                    id="filter-location"
-                    value={filterLocation}
-                    onChange={(e) => setFilterLocation(e.target.value)}
-                    className="w-full bg-[#F8F5F0] border border-gray-200 px-3 py-2.5 text-xs focus:outline-none focus:border-[#D4AF37] transition-colors duration-300"
-                  >
-                    <option value="">All Locations</option>
-                    {locations.map((l) => (
-                      <option key={l} value={l}>{l}</option>
-                    ))}
-                  </select>
-                </div>
-
                 {/* Capacity */}
                 <div className="space-y-2">
                   <label className="text-xs uppercase font-semibold text-[#334155]/60 tracking-wider">Villa Capacity</label>
@@ -131,36 +86,6 @@ export default function VillasPage() {
                   >
                     {capacities.map((c) => (
                       <option key={c.value} value={c.value}>{c.label}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Guests */}
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-semibold text-[#334155]/60 tracking-wider">Guests Capacity</label>
-                  <select
-                    id="filter-guests"
-                    value={filterGuests}
-                    onChange={(e) => setFilterGuests(parseInt(e.target.value))}
-                    className="w-full bg-[#F8F5F0] border border-gray-200 px-3 py-2.5 text-xs focus:outline-none focus:border-[#D4AF37] transition-colors duration-300"
-                  >
-                    {guestOptions.map((g) => (
-                      <option key={g.value} value={g.value}>{g.label}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Villa Type */}
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-semibold text-[#334155]/60 tracking-wider">Villa Category</label>
-                  <select
-                    id="filter-villa-type"
-                    value={filterType}
-                    onChange={(e) => setFilterType(e.target.value)}
-                    className="w-full bg-[#F8F5F0] border border-gray-200 px-3 py-2.5 text-xs focus:outline-none focus:border-[#D4AF37] transition-colors duration-300"
-                  >
-                    {villaTypes.map((t) => (
-                      <option key={t.value} value={t.value}>{t.label}</option>
                     ))}
                   </select>
                 </div>

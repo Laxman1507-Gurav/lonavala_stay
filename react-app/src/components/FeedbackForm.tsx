@@ -69,7 +69,7 @@ export default function FeedbackForm({ onSuccess }: FeedbackFormProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                placeholder="John Doe"
+                placeholder="Your Name"
                 className="w-full bg-[#F8F5F0] border border-gray-200 px-4 py-3 text-xs focus:outline-none focus:border-[#D4AF37] transition-colors duration-300"
               />
             </div>

@@ -46,7 +46,7 @@ export default function Footer() {
               { label: 'Home', to: '/' },
               { label: 'About Us', to: '/about' },
               { label: 'Browse Villas', to: '/villas' },
-              { label: 'Special Offers', to: '/offers' },
+
               { label: 'Contact & Support', to: '/contact' },
             ].map((link) => (
               <li key={link.label}>

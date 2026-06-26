@@ -5,8 +5,7 @@ const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: "Villa's", to: '/villas' },
-  { label: 'Destinations', to: '/#destinations' },
-  { label: 'Offers', to: '/offers' },
+  { label: 'Destinations', to: '/?scrollTo=destinations' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -25,7 +24,7 @@ export default function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false)
-  }, [location.pathname])
+  }, [location])
 
   const isActive = (to: string) => {
     if (to === '/') return location.pathname === '/'
